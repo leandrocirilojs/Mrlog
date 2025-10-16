@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loren Bolos e Magias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset e estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #f8c8dc;
+            --secondary-color: #c9a0dc;
+            --accent-color: #a463b0;
+            --text-color: #5a3d5c;
+            --light-color: #fff9fb;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h1, h2, h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 20px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 80px;
+            margin-right: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0;
+            color: var(--text-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(248, 200, 220, 0.7), rgba(201, 160, 220, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8c8dc"/><path d="M0 0L100 100M100 0L0 100" stroke="%23c9a0dc" stroke-width="2"/></svg>');
+            background-size: cover;
+            text-align: center;
+            padding: 100px 0;
+            color: var(--text-color);
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Sobre */
+        .sobre {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .sobre-img {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sobre-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .sobre-text {
+            flex: 1;
+        }
+        
+        /* Produtos */
+        .produtos {
+            background-color: var(--primary-color);
+        }
+        
+        .produtos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .produto-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .produto-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .produto-img {
+            height: 200px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .produto-info {
+            padding: 20px;
+        }
+        
+        /* Contato */
+        .contato-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .contato-info {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contato-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contato-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-right: 15px;
+            width: 30px;
+        }
+        
+        .mapa {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 300px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--text-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            .sobre {
+                flex-direction: column;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Animações */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        .magic-sparkle {
+            position: relative;
+        }
+        
+        .magic-sparkle::after {
+            content: "✨";
+            position: absolute;
+            top: -10px;
+            right: -15px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <!-- Logo será inserida aqui -->
+                <div style="width: 80px; height: 80px; background-color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h1>Loren <span class="magic-sparkle">Bolos e Magias</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#produtos">Produtos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Bolos Mágicos para Momentos Especiais</h2>
+            <p>Transformamos seus momentos em experiências encantadas com nossos bolos artesanais feitos com amor e um toque de magia.</p>
+            <a href="https://wa.me/5511913428903?text=Olá! Gostaria de fazer um pedido de bolo mágico!" class="btn floating" target="_blank">
+                <i class="fab fa-whatsapp"></i> Fazer Pedido
+            </a>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre">
+        <div class="container">
+            <h2>Sobre Nós</h2>
+            <div class="sobre">
+                <div class="sobre-img">
+                    <!-- Foto será inserida aqui -->
+                    <div style="height: 400px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); display: flex; align-items: center; justify-content: center; color: white; font-size: 5rem;">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                </div>
+                <div class="sobre-text">
+                    <p>Na Loren Bolos e Magias, acreditamos que cada celebração merece um toque especial. Combinamos técnicas tradicionais de confeitaria com ingredientes selecionados para criar bolos que são verdadeiras obras de arte.</p>
+                    <p>Nossa paixão é transformar seus sonhos em realidade, criando bolos personalizados que encantam não apenas pelo sabor, mas também pela apresentação mágica.</p>
+                    <p>Cada bolo é preparado com carinho e atenção aos detalhes, garantindo uma experiência única para você e seus convidados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produtos -->
+    <section id="produtos" class="produtos">
+        <div class="container">
+            <h2>Nossos Bolos Mágicos</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <div class="produto-img">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="produto-info">
+                        <h3>Bolo Real</h3>
+                        <p>Um bolo digno de realeza, com detalhes em pasta americana e recheios surpreendentes.</p>
+                    </div>
+                </div>
+                <div class="produto-card">
+                    <div class="produto-img">
+                        <i class="fas fa-hat-wizard"></i>
+                    </div>
+                    <div class="produto-info">
+                        <h3>Bolo Encantado</h3>
+                        <p>Com elementos surpresa e decoração temática, perfeito para festas com tema de magia.</p>
+                    </div>
+                </div>
+                <div class="produto-card">
+                    <div class="produto-img">
+                        <i class="fas fa-fairy"></i>
+                    </div>
+                    <div class="produto-info">
+                        <h3>Bolo das Fadas</h3>
+                        <p>Delicado e mágico, com cores suaves e detalhes que parecem saídos de um conto de fadas.</p>
+                    </div>
+                </div>
+                <div class="produto-card">
+                    <div class="produto-img">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <div class="produto-info">
+                        <h3>Bolo Épico</h3>
+                        <p>Para os amantes de aventuras, com designs ousados e sabores intensos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato">
+        <div class="container">
+            <h2>Entre em Contato</h2>
+            <div class="contato-grid">
+                <div class="contato-info">
+                    <div class="contato-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h3>WhatsApp</h3>
+                            <p>(11) 91342-8903</p>
+                            <a href="https://wa.me/5511913428903?text=Olá! Gostaria de fazer um pedido de bolo mágico!" class="btn" target="_blank">Enviar Mensagem</a>
+                        </div>
+                    </div>
+                    <div class="contato-item">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <h3>Instagram</h3>
+                            <p>@Loren.sweet.cake</p>
+                            <a href="https://instagram.com/Loren.sweet.cake" class="btn" target="_blank">Seguir</a>
+                        </div>
+                    </div>
+                    <div class="contato-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Endereço</h3>
+                            <p>Rua Dr Carlos Aparecido Rabelo de Freitas, 445</p>
+                            <p>Jd Ipanema - Guarulhos, SP</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mapa">
+                    <!-- Mapa será inserido aqui -->
+                    <i class="fas fa-map-marked-alt" style="font-size: 3rem;"></i>
+                    <p>Mapa da Localização</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://instagram.com/Loren.sweet.cake" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/5511913428903?text=Olá! Gostaria de fazer um pedido de bolo mágico!" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>Loren Bolos e Magias &copy; 2023 - Todos os direitos reservados</p>
+            <p>Rua Dr Carlos Aparecido Rabelo de Freitas, 445 - Jd Ipanema - Guarulhos, SP</p>
+        </div>
+    </footer>
+
+    <script>
+        // Efeito de rolagem suave para os links de navegação
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Efeito de destaque nos cards de produtos
+        const productCards = document.querySelectorAll('.produto-card');
+        
+        productCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Animação de entrada para as seções
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Fretes</title>
+    <title>Riqueza Instantânea - Seu Caminho para Prosperidade</title>
     <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --primary-dark: #1B5E20;
+            --secondary: #FFC107;
+            --dark: #333;
+            --light: #f9f9f9;
+            --gray: #e0e0e0;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -13,111 +24,164 @@
         }
         
         body {
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
         
+        /* Header */
         header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
             text-align: center;
-            margin-bottom: 30px;
-            padding: 25px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid #3498db;
         }
         
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 2.2rem;
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
         }
         
-        .subtitle {
-            color: #7f8c8d;
-            font-size: 1.1rem;
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
         }
         
-        .dashboard {
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #ffb300;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-dark);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+        
+        /* Cards */
+        .cards {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         
         .card {
-            background-color: #fff;
+            background-color: white;
             border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-10px);
         }
         
-        .card h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            border-bottom: 2px solid #f1f1f1;
-            padding-bottom: 10px;
+        .card-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
         }
         
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #f8f9fa;
-            flex: 1;
-            margin: 0 10px;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            margin-bottom: 8px;
-        }
-        
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        
-        .profit {
-            text-align: center;
+        .card-content {
             padding: 20px;
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
-            border-radius: 8px;
-            margin-top: 20px;
-            color: white;
         }
         
-        .profit-label {
-            font-size: 1rem;
-            margin-bottom: 5px;
-            opacity: 0.9;
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-dark);
         }
         
-        .profit-value {
-            font-size: 2.2rem;
-            font-weight: bold;
+        /* Calculator */
+        .calculator {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         .form-group {
@@ -128,305 +192,306 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: #2c3e50;
         }
         
-        .form-control {
+        .form-group input {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 12px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
             font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
         }
         
-        .form-control:focus {
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-            outline: none;
-        }
-        
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .checkbox-group input {
-            margin-right: 10px;
-            transform: scale(1.2);
-        }
-        
-        .checkbox-group label {
-            margin-bottom: 0;
-            font-weight: 500;
-            color: #2c3e50;
-        }
-        
-        .btn {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s;
-            width: 100%;
-            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
-        }
-        
-        .btn:hover {
-            background: linear-gradient(135deg, #2980b9, #3498db);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
-            transform: translateY(-2px);
-        }
-        
-        .history {
+        .result {
             margin-top: 30px;
-        }
-        
-        .history h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f1f1f1;
-        }
-        
-        .history-item {
-            background-color: #fff;
-            border-radius: 10px;
             padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid #3498db;
+            background-color: var(--gray);
+            border-radius: 5px;
+            text-align: center;
+            display: none;
         }
         
-        .history-header {
+        .result h3 {
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
+            flex-direction: column;
             align-items: center;
         }
         
-        .driver-name {
-            font-weight: bold;
-            color: #2c3e50;
-            font-size: 1.2rem;
+        .footer-links {
+            display: flex;
+            margin: 20px 0;
         }
         
-        .date {
-            color: #7f8c8d;
-            background-color: #f8f9fa;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
         }
         
-        .history-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 15px;
+        .footer-links a:hover {
+            color: var(--secondary);
         }
         
-        .detail-item {
-            margin-bottom: 10px;
-        }
-        
-        .detail-label {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            margin-bottom: 5px;
-        }
-        
-        .detail-value {
-            font-weight: bold;
-            color: #2c3e50;
-            font-size: 1.1rem;
-        }
-        
-        .profit-positive {
-            color: #27ae60;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            border-top: 1px solid #eee;
-        }
-        
+        /* Responsive */
         @media (max-width: 768px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-            
-            .history-details {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .stats {
+            .header-content {
                 flex-direction: column;
+                text-align: center;
             }
             
-            .stat-item {
-                margin: 5px 0;
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
             }
-        }
-        
-        @media (max-width: 480px) {
-            .history-details {
-                grid-template-columns: 1fr;
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Controle de Fretes</h1>
-            <p class="subtitle">Gerencie suas saídas de fretes de forma eficiente</p>
-        </header>
-        
-        <div class="dashboard">
-            <div class="card">
-                <h2>Resumo Financeiro</h2>
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-label">Total Pago</div>
-                        <div class="stat-value">R$ 0,00</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Total Recebido</div>
-                        <div class="stat-value">R$ 0,00</div>
-                    </div>
-                </div>
-                <div class="profit">
-                    <div class="profit-label">Lucro Total</div>
-                    <div class="profit-value">R$ 0,00</div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <h2>Novo Frete</h2>
-                <p>Preencha os dados do frete abaixo</p>
-                
-                <form id="freight-form">
-                    <div class="form-group">
-                        <label>Motorista</label>
-                        <input type="text" class="form-control" placeholder="Nome do motorista">
-                    </div>
-                    
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="store-checkbox" checked>
-                        <label for="store-checkbox">Loja</label>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nome da loja">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Valor Pago</label>
-                        <input type="number" class="form-control" placeholder="0.00" step="0.01">
-                    </div>
-                    
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="received-checkbox" checked>
-                        <label for="received-checkbox">Valor Recebido</label>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="number" class="form-control" placeholder="0.00" step="0.01">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Data</label>
-                        <input type="date" class="form-control" value="2025-10-16">
-                    </div>
-                    
-                    <button type="submit" class="btn">Adicionar Frete</button>
-                </form>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Riqueza<span>Instantânea</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#estrategias">Estratégias</a></li>
+                        <li><a href="#ferramentas">Ferramentas</a></li>
+                        <li><a href="#inspiracao">Inspiração</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
-        
-        <div class="history">
-            <h2>Histórico de Fretes</h2>
-            
-            <div class="history-item">
-                <div class="history-header">
-                    <div class="driver-name">Alexandre</div>
-                    <div class="date">16/10/2025</div>
-                </div>
-                
-                <div class="history-details">
-                    <div class="detail-item">
-                        <div class="detail-label">Loja</div>
-                        <div class="detail-value">Itanhaém</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Valor Pago</div>
-                        <div class="detail-value">R$ 160,00</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Valor Recebido</div>
-                        <div class="detail-value">R$ 180,00</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Lucro</div>
-                        <div class="detail-value profit-positive">R$ 20,00</div>
-                    </div>
-                </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h1>Transforme sua Vida Financeira</h1>
+            <p>Descubra estratégias comprovadas, ferramentas práticas e a mentalidade necessária para alcançar a liberdade financeira que você sempre desejou.</p>
+            <a href="#estrategias" class="btn">Comece Agora</a>
+        </div>
+    </section>
+
+    <!-- Estratégias Section -->
+    <section id="estrategias">
+        <div class="container">
+            <div class="section-title">
+                <h2>Estratégias para Ficar Rico</h2>
+                <p>Conheça os caminhos mais eficazes para construir riqueza de forma consistente</p>
             </div>
-            
-            <div class="history-item">
-                <div class="history-header">
-                    <div class="driver-name">João Silva</div>
-                    <div class="date">15/10/2025</div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Investimentos Inteligentes</h3>
+                        <p>Aprenda a fazer seu dinheiro trabalhar para você através de investimentos em ações, fundos imobiliários e criptomoedas.</p>
+                    </div>
                 </div>
-                
-                <div class="history-details">
-                    <div class="detail-item">
-                        <div class="detail-label">Loja</div>
-                        <div class="detail-value">São Paulo</div>
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Empreendedorismo</h3>
+                        <p>Descubra como identificar oportunidades de negócio e criar empresas que geram valor e riqueza.</p>
                     </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Valor Pago</div>
-                        <div class="detail-value">R$ 200,00</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Valor Recebido</div>
-                        <div class="detail-value">R$ 250,00</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Lucro</div>
-                        <div class="detail-value profit-positive">R$ 50,00</div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Educação Financeira</h3>
+                        <p>Domine os princípios fundamentais do dinheiro: orçamento, poupança, eliminação de dívidas e planejamento.</p>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <footer>
-            <p>Made with Manus</p>
-        </footer>
-    </div>
+    </section>
+
+    <!-- Ferramentas Section -->
+    <section id="ferramentas">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ferramentas Práticas</h2>
+                <p>Utilize nossas calculadoras e planejadores para tomar decisões financeiras mais inteligentes</p>
+            </div>
+            <div class="calculator">
+                <h3>Calculadora de Juros Compostos</h3>
+                <p>Veja como pequenos investimentos regulares podem se transformar em grandes fortunas ao longo do tempo.</p>
+                
+                <div class="form-group">
+                    <label for="initial-investment">Investimento Inicial (R$)</label>
+                    <input type="number" id="initial-investment" value="1000" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="monthly-contribution">Contribuição Mensal (R$)</label>
+                    <input type="number" id="monthly-contribution" value="500" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="interest-rate">Taxa de Juros Anual (%)</label>
+                    <input type="number" id="interest-rate" value="8" min="0" step="0.1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="years">Período (anos)</label>
+                    <input type="number" id="years" value="10" min="1">
+                </div>
+                
+                <button class="btn" id="calculate-btn">Calcular</button>
+                
+                <div class="result" id="result">
+                    <h3>Resultado</h3>
+                    <p id="result-text"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inspiração Section -->
+    <section id="inspiracao">
+        <div class="container">
+            <div class="section-title">
+                <h2>Inspiração para Prosperar</h2>
+                <p>Mude sua mentalidade e adote os hábitos das pessoas bem-sucedidas financeiramente</p>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Mentalidade de Crescimento</h3>
+                        <p>Aprenda a desenvolver uma mentalidade que vê oportunidades onde outros veem obstáculos.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Hábitos dos Ricos</h3>
+                        <p>Descubra os comportamentos diários que separam os financeiramente bem-sucedidos dos demais.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Plano de 90 Dias</h3>
+                        <p>Siga nosso plano passo a passo para transformar suas finanças nos próximos 3 meses.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Riqueza<span>Instantânea</span></div>
+                <p>Seu caminho para a liberdade financeira começa aqui</p>
+                <div class="footer-links">
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Contato</a>
+                </div>
+                <p>&copy; 2023 Riqueza Instantânea. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Simulação de funcionalidade básica
-        document.getElementById('freight-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Frete adicionado com sucesso!');
-            // Aqui você implementaria a lógica para adicionar o frete à lista
+        // Calculadora de Juros Compostos
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            // Obter valores dos inputs
+            const initialInvestment = parseFloat(document.getElementById('initial-investment').value);
+            const monthlyContribution = parseFloat(document.getElementById('monthly-contribution').value);
+            const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100;
+            const years = parseInt(document.getElementById('years').value);
+            
+            // Calcular juros compostos
+            const months = years * 12;
+            const monthlyRate = Math.pow(1 + interestRate, 1/12) - 1;
+            
+            let futureValue = initialInvestment * Math.pow(1 + monthlyRate, months);
+            
+            // Adicionar contribuições mensais
+            for (let i = 0; i < months; i++) {
+                futureValue += monthlyContribution * Math.pow(1 + monthlyRate, months - i - 1);
+            }
+            
+            // Calcular total investido
+            const totalInvested = initialInvestment + (monthlyContribution * months);
+            
+            // Calcular juros ganhos
+            const interestEarned = futureValue - totalInvested;
+            
+            // Exibir resultado
+            const resultElement = document.getElementById('result');
+            const resultText = document.getElementById('result-text');
+            
+            resultText.innerHTML = `
+                <p>Valor Futuro: <strong>R$ ${futureValue.toFixed(2)}</strong></p>
+                <p>Total Investido: R$ ${totalInvested.toFixed(2)}</p>
+                <p>Juros Ganhos: R$ ${interestEarned.toFixed(2)}</p>
+            `;
+            
+            resultElement.style.display = 'block';
+        });
+        
+        // Navegação suave
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animação de cards ao rolar
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Aplicar animação aos cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(card);
         });
     </script>
 </body>

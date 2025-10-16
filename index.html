@@ -1,228 +1,346 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <meta charset="UTF-8">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-<link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/leandrocirilojs/TransporteLMR/3d3e0727935835ee42b9aabbca506cea40d3d2db/favicon.svg">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Saídas MRL</title>
-    <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
-      
-<style>
-    .input-container {
-  position: relative;
-  width: 100%; /* Ajuste conforme necessário */
-}
-
-.input-container input {
-  width: 100%;
-  padding-right: 40px; /* Espaço para o ícone */
-  box-sizing: border-box;
-}
-
-.input-container i {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: white;
-}
-
-.input-container i:hover {
-  color: #ba7dff; /* Cor do ícone no hover */
-}
-</style>
-    
+    <title>Controle de Fretes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .profit {
+            text-align: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        
+        .profit-label {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        
+        .profit-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+        
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .history {
+            margin-top: 30px;
+        }
+        
+        .history-item {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .driver-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .date {
+            color: #7f8c8d;
+        }
+        
+        .history-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .detail-item {
+            margin-bottom: 10px;
+        }
+        
+        .detail-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .detail-value {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .profit-positive {
+            color: #27ae60;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .history-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    
-<header class="header">
-    <div class="logo">
-        <h1><i class="fa-solid fa-dolly" style="color:#ba7dff ;"></i> MRL Log</h1>
-    </div>
-    <div class="menu-toggle" id="mobile-menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-    </div>
-
-    <nav class="nav" id="nav-links">
-        <header class="whatsapp-header">
-    <div class="whatsapp-logo">
-        
-    
+    <div class="container">
+        <header>
+            <h1>Controle de Fretes</h1>
+            <p class="subtitle">Gerencie suas saídas de fretes de forma eficiente</p>
         </header>
-
-<div class="whatsapp-scheduler-container zap">
- 
-    
-    
-    
-    <div class="input-container">
-    <input type="number" id="whatsapp-scheduler-number" class="whatsapp-scheduler-input" placeholder="Número com DDD">
- <i class="fas fa-microphone" onclick="iniciarReconhecimento()"></i>
-    </div> 
-    
-    
-    
-    
-    
-    <!-- Mensagens predefinidas -->
-    <div class="whatsapp-scheduler-message-options">
-            <button class="whatsapp-scheduler-message-button" data-message="Boa tarde. Oi,tudo bem? Sou entregador do Tenda">Oi. Entrega Tenda</button>
-        <button class="whatsapp-scheduler-message-button" data-message="Poderia me enviar sua localização?">Localização</button>
-        <button class="whatsapp-scheduler-message-button" data-message="Estou a caminho da sua entrega. Tenda Delivery.">A caminho</button>
-    </div>
-
-    <!-- Campo de mensagem -->
-    <textarea id="whatsapp-scheduler-message" class="whatsapp-scheduler-textarea" placeholder="Digite a mensagem..." readonly></textarea>
-
-    <!-- Botão de Enviar -->
-    <button id="whatsapp-scheduler-send" class="whatsapp-scheduler-button">Enviar WhatsApp</button>
-</div>
-
-
         
-    </nav>
-</header>
-
-<div class="container">
-    <h1>Controle de Saídas</h1>
-    <form id="expense-form">
-        <select id="driver-name" required>
-            <option value="" disabled selected> Selecione o Motorista</option>
-            <option value="Weverton">Weverton</option>
-            <option value="Alexandre">Alexandre</option>
-            <option value="Leandro">Leandro</option>
-            <option value="Antonio">Antonio Marcos</option>
-            <option value="Marcos">Marcos</option>
-            <option value="Motorista1">Motorista1</option>
-            <option value="Motorista2">Motorista2</option>
-            <option value="Flavio">Flavio</option>
-            <option value="Henrique">Henrique</option>
-            <option value="Alex">Alex</option>
-        </select>
-        <select id="store-name" required>
-            <option value="">Selecione a Loja</option>
-            <option value="Tenda Itanhaém">Tenda Itanhaém</option>
-            <option value="Tenda Praia Grande">Tenda Praia Grande</option>
-            <option value="Krill Cubatão">Krill Cubatão</option>
-            <option value="Krill Mongaguá">Krill Mongaguá</option>
-            <option value="Krill Praia Grande">Krill Praia Grande</option>
-            <option value="Carrefour São Vicente">Carrefour São Vicente</option>
-        </select>
-        <input type="number" id="expense-amount" placeholder="Valor da Saída" required>
-        <input type="number" id="received-amount" placeholder="Valor Recebido" required>
-        <input type="number" id="expense-weight" placeholder="Peso (kg)" required>
-        <input type="number" id="expense-nfs" placeholder="Qtd NFs:" name="expense-nfs" min="1" value="1" required>
-
-
-        <input type="date" id="expense-date" required>
-        <button type="submit"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Adicionar Saída</button>
-    </form>
-
-    <div class="expense-list">
-        <div class="filters">
-            <button id="toggle-filters">
-    <i class="fa-solid fa-filter" style="color: #ffffff;"></i>
-    <span>Exibir Filtros</span> <!-- Texto dentro de um span -->
-</button>
-            <div id="filter-section" style="display: none;">
+        <div class="dashboard">
+            <div class="card">
+                <h2>Resumo Financeiro</h2>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Total Pago</div>
+                        <div class="stat-value">R$ 0,00</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Total Recebido</div>
+                        <div class="stat-value">R$ 0,00</div>
+                    </div>
+                </div>
+                <div class="profit">
+                    <div class="profit-label">Lucro Total</div>
+                    <div class="profit-value">R$ 0,00</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Novo Frete</h2>
+                <p>Preencha os dados do frete abaixo</p>
                 
-                <input type="date" id="filter-start-date" placeholder="Data Início">
-                <input type="date" id="filter-end-date" placeholder="Data Fim">
-                
-                <select id="filter-driver">
-                    <option value="">Selecione o Motorista</option> <!-- Opção para não aplicar filtro -->
-                    <option value="Weverton">Weverton</option>
-                    <option value="Alexandre">Alexandre</option>
-                    <option value="Leandro">Leandro</option>
-                    <option value="Antonio">Antonio Marcos</option>
-                    <option value="Marcos">Marcos</option>
-                    <option value="Motorista1">Motorista1</option>
-                    <option value="Motorista2">Motorista2</option>
-                    <option value="Flavio">Flavio</option>
-                    <option value="Henrique">Henrique</option>
-                    <option value="Alex">Alex</option>
-                </select>
-                
-                <select id="filter-store">
-                    <option value="">Selecione a Loja</option>
-                    <option value="Tenda Itanhaém">Tenda Itanhaém</option>
-                    <option value="Tenda Praia Grande">Tenda Praia Grande</option>
-                    <option value="Krill Cubatão">Krill Cubatão</option>
-                    <option value="Krill Mongaguá">Krill Mongaguá</option>
-                    <option value="Krill Praia Grande">Krill Praia Grande</option>
-                    <option value="Carrefour São Vicente">Carrefour São Vicente</option>
-                </select>
+                <form id="freight-form">
+                    <div class="form-group">
+                        <label>Motorista</label>
+                        <input type="text" class="form-control" placeholder="Nome do motorista">
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="store-checkbox" checked>
+                        <label for="store-checkbox">Loja</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Nome da loja">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Valor Pago</label>
+                        <input type="number" class="form-control" placeholder="0.00" step="0.01">
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="received-checkbox" checked>
+                        <label for="received-checkbox">Valor Recebido</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="number" class="form-control" placeholder="0.00" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input type="date" class="form-control" value="2025-10-16">
+                    </div>
+                    
+                    <button type="submit" class="btn">Adicionar Frete</button>
+                </form>
             </div>
         </div>
-
-<div class="total">
-        <h2>Pagamento Motorista: R$<span id="total-amount">0.00</span></h2>
-        <h2>Lucro Total: R$<span style="color: green;" id="total-profit">0.00</span></h2>
-</div>
-
         
-        <h2>Saídas</h2>
-        <ul id="expenses"></ul>
+        <div class="history">
+            <h2>Histórico de Fretes</h2>
+            
+            <div class="history-item">
+                <div class="history-header">
+                    <div class="driver-name">Alexandre</div>
+                    <div class="date">16/10/2025</div>
+                </div>
+                
+                <div class="history-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Loja</div>
+                        <div class="detail-value">Itanhaém</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Valor Pago</div>
+                        <div class="detail-value">R$ 160,00</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Valor Recebido</div>
+                        <div class="detail-value">R$ 180,00</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Lucro</div>
+                        <div class="detail-value profit-positive">R$ 20,00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Made with Manus</p>
+        </footer>
     </div>
 
-    
-<div class="action-buttons">
-    <button id="export-excel"><i class="fa-solid fa-lg fa-file-excel" style="color: white;"></i> Excel</button>
-    <button id="send-whatsapp"> <i class="fa-brands fa-lg fa-whatsapp" style="color: white;"></i> WhatsApp</button>
-    <button id="download-pdf"><i class="fa-solid fa-lg fa-file-pdf" style="color: white;"></i> PDF</button>
-</div>
-    <!-- Botão para baixar o PDF -->
-    
-</div>
-
-<script>
-    const menuToggle = document.getElementById('mobile-menu');
-    const navLinks = document.getElementById('nav-links');
-    const toggleFiltersButton = document.getElementById('toggle-filters');
-    const filterSection = document.getElementById('filter-section');
-
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-
-    toggleFiltersButton.addEventListener('click', () => {
-    const isHidden = filterSection.style.display === 'none';
-    filterSection.style.display = isHidden ? 'block' : 'none';
-    
-    // Altera apenas o texto dentro do <span>
-    const span = toggleFiltersButton.querySelector('span');
-    span.textContent = isHidden ? 'Ocultar Filtros' : 'Exibir Filtros';
-});
-
-
-
-    //falar e transcrever 
-    function iniciarReconhecimento() {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = 'pt-BR'; // Define o idioma para português do Brasil
-      recognition.onresult = function(event) {
-        const transcricao = event.results[0][0].transcript;
-        document.getElementById('whatsapp-scheduler-number').value = transcricao;
-      };
-      recognition.start(); // Inicia o reconhecimento de fala
-    }
-
-    
-    
-</script>
-
-<script src="script.js"></script>
-
+    <script>
+        // Simulação de funcionalidade básica
+        document.getElementById('freight-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Frete adicionado com sucesso!');
+            // Aqui você implementaria a lógica para adicionar o frete à lista
+        });
+    </script>
 </body>
 </html>

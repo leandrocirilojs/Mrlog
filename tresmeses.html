@@ -1,1 +1,818 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de 90 Dias - Riqueza Instantânea</title>
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --primary-dark: #1B5E20;
+            --secondary: #FFC107;
+            --dark: #333;
+            --light: #f9f9f9;
+            --gray: #e0e0e0;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #ffb300;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-dark);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary-light);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 60px;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -12px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-period {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .timeline-period i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .timeline-content h3 {
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+        
+        .timeline-content ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-content li {
+            margin-bottom: 8px;
+        }
+        
+        .progress-container {
+            margin-top: 20px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: var(--gray);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+        
+        /* Checklist */
+        .checklist-section {
+            background-color: #f5f5f5;
+        }
+        
+        .checklist-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .checklist-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .checklist-card h3 {
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .checklist-card h3 i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .checklist-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .checklist-item input {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .checklist-item label {
+            flex: 1;
+        }
+        
+        /* Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .resource-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .resource-icon {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-light);
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .resource-content {
+            padding: 20px;
+        }
+        
+        .resource-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 19px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Riqueza<span>Instantânea</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="index.html#estrategias">Estratégias</a></li>
+                        <li><a href="index.html#ferramentas">Ferramentas</a></li>
+                        <li><a href="index.html#inspiracao">Inspiração</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Plano de 90 Dias para Transformar suas Finanças</h1>
+            <p>Um guia passo a passo para organizar suas finanças, eliminar dívidas e começar a construir riqueza em apenas 3 meses</p>
+            <button class="btn" id="start-plan-btn">Começar Meu Plano</button>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Jornada de 90 Dias</h2>
+                <p>Siga este plano estruturado para transformar completamente sua situação financeira</p>
+            </div>
+            
+            <div class="timeline">
+                <!-- Mês 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-period">
+                            <i class="fas fa-calendar-week"></i> Dias 1-30: Fundação Financeira
+                        </div>
+                        <h3>Mês 1 - Organização e Conscientização</h3>
+                        <ul>
+                            <li>Mapeie toda sua situação financeira atual</li>
+                            <li>Crie um orçamento realista</li>
+                            <li>Identifique e corte gastos desnecessários</li>
+                            <li>Estabeleça metas financeiras claras</li>
+                            <li>Monitore todos os gastos diariamente</li>
+                        </ul>
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>Progresso</span>
+                                <span id="month1-progress">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="month1-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mês 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-period">
+                            <i class="fas fa-calendar-week"></i> Dias 31-60: Eliminação de Dívidas
+                        </div>
+                        <h3>Mês 2 - Foco na Liberdade Financeira</h3>
+                        <ul>
+                            <li>Implemente estratégia de pagamento de dívidas</li>
+                            <li>Negocie taxas de juros com credores</li>
+                            <li>Aumente sua renda com atividades extras</li>
+                            <li>Construa um fundo de emergência inicial</li>
+                            <li>Pesquise oportunidades de investimento</li>
+                        </ul>
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>Progresso</span>
+                                <span id="month2-progress">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="month2-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mês 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-period">
+                            <i class="fas fa-calendar-week"></i> Dias 61-90: Aceleração da Riqueza
+                        </div>
+                        <h3>Mês 3 - Construção do Futuro</h3>
+                        <ul>
+                            <li>Faça seus primeiros investimentos</li>
+                            <li>Automatize suas economias</li>
+                            <li>Diversifique suas fontes de renda</li>
+                            <li>Avalie e ajuste seu plano financeiro</li>
+                            <li>Estabeleça metas para os próximos 6 meses</li>
+                        </ul>
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>Progresso</span>
+                                <span id="month3-progress">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="month3-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checklist Section -->
+    <section class="checklist-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Checklist de Progresso</h2>
+                <p>Marque as tarefas conforme for completando para acompanhar seu desenvolvimento</p>
+            </div>
+            
+            <div class="checklist-container">
+                <!-- Mês 1 Checklist -->
+                <div class="checklist-card">
+                    <h3><i class="fas fa-list-check"></i> Mês 1 - Tarefas</h3>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task1-1">
+                            <label for="task1-1">Listar todas as receitas e despesas</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task1-2">
+                            <label for="task1-2">Criar orçamento mensal</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task1-3">
+                            <label for="task1-3">Identificar 3 gastos para reduzir</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task1-4">
+                            <label for="task1-4">Definir metas financeiras específicas</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task1-5">
+                            <label for="task1-5">Configurar sistema de acompanhamento</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mês 2 Checklist -->
+                <div class="checklist-card">
+                    <h3><i class="fas fa-list-check"></i> Mês 2 - Tarefas</h3>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task2-1">
+                            <label for="task2-1">Listar todas as dívidas com juros</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task2-2">
+                            <label for="task2-2">Criar plano de pagamento de dívidas</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task2-3">
+                            <label for="task2-3">Estabelecer fundo de emergência</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task2-4">
+                            <label for="task2-4">Identificar fonte de renda extra</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task2-5">
+                            <label for="task2-5">Pesquisar opções de investimento</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mês 3 Checklist -->
+                <div class="checklist-card">
+                    <h3><i class="fas fa-list-check"></i> Mês 3 - Tarefas</h3>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task3-1">
+                            <label for="task3-1">Fazer primeiro investimento</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task3-2">
+                            <label for="task3-2">Automatizar transferências para poupança</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task3-3">
+                            <label for="task3-3">Diversificar fontes de renda</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task3-4">
+                            <label for="task3-4">Revisar e ajustar orçamento</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="task3-5">
+                            <label for="task3-5">Criar plano para próximos 6 meses</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Recursos Essenciais</h2>
+                <p>Ferramentas e materiais para apoiar sua jornada financeira</p>
+            </div>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Planilha de Orçamento</h3>
+                        <p>Modelo personalizável para controle completo de receitas e despesas.</p>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Calculadora de Metas</h3>
+                        <p>Ferramenta para calcular quanto poupar para alcançar seus objetivos.</p>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Guia de Investimentos</h3>
+                        <p>Introdução aos principais tipos de investimento para iniciantes.</p>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Negociação de Dívidas</h3>
+                        <p>Estratégias para negociar melhores condições com credores.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Riqueza<span>Instantânea</span></div>
+                <p>Transformando vidas financeiras em 90 dias</p>
+                <div class="footer-links">
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Contato</a>
+                </div>
+                <p>&copy; 2023 Riqueza Instantânea. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar o plano
+        document.getElementById('start-plan-btn').addEventListener('click', function() {
+            alert('Parabéns por dar o primeiro passo! Seu plano de 90 dias foi iniciado. Acompanhe seu progresso diariamente.');
+            
+            // Atualizar progresso do primeiro mês
+            updateProgress('month1', 10);
+            
+            // Salvar data de início no localStorage
+            localStorage.setItem('planStartDate', new Date().toISOString());
+        });
+        
+        // Atualizar barras de progresso
+        function updateProgress(month, percentage) {
+            const progressElement = document.getElementById(`${month}-progress`);
+            const fillElement = document.getElementById(`${month}-fill`);
+            
+            if (progressElement && fillElement) {
+                progressElement.textContent = `${percentage}%`;
+                fillElement.style.width = `${percentage}%`;
+            }
+        }
+        
+        // Verificar checkboxes e atualizar progresso
+        document.querySelectorAll('.checklist-item input').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                // Verificar se está salvo no localStorage
+                if (this.checked) {
+                    localStorage.setItem(this.id, 'true');
+                } else {
+                    localStorage.removeItem(this.id);
+                }
+                
+                updateOverallProgress();
+            });
+            
+            // Restaurar estado dos checkboxes
+            if (localStorage.getItem(checkbox.id) === 'true') {
+                checkbox.checked = true;
+            }
+        });
+        
+        // Calcular progresso geral
+        function updateOverallProgress() {
+            // Mês 1
+            const month1Tasks = document.querySelectorAll('#task1-1, #task1-2, #task1-3, #task1-4, #task1-5');
+            const month1Completed = Array.from(month1Tasks).filter(task => task.checked).length;
+            const month1Progress = (month1Completed / month1Tasks.length) * 100;
+            updateProgress('month1', month1Progress);
+            
+            // Mês 2
+            const month2Tasks = document.querySelectorAll('#task2-1, #task2-2, #task2-3, #task2-4, #task2-5');
+            const month2Completed = Array.from(month2Tasks).filter(task => task.checked).length;
+            const month2Progress = (month2Completed / month2Tasks.length) * 100;
+            updateProgress('month2', month2Progress);
+            
+            // Mês 3
+            const month3Tasks = document.querySelectorAll('#task3-1, #task3-2, #task3-3, #task3-4, #task3-5');
+            const month3Completed = Array.from(month3Tasks).filter(task => task.checked).length;
+            const month3Progress = (month3Completed / month3Tasks.length) * 100;
+            updateProgress('month3', month3Progress);
+        }
+        
+        // Inicializar progresso ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            updateOverallProgress();
+            
+            // Verificar se já existe uma data de início
+            const planStartDate = localStorage.getItem('planStartDate');
+            if (planStartDate) {
+                document.getElementById('start-plan-btn').textContent = 'Continuar Meu Plano';
+                
+                // Calcular dias passados e atualizar progresso automaticamente
+                const startDate = new Date(planStartDate);
+                const currentDate = new Date();
+                const daysPassed = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+                
+                if (daysPassed >= 0 && daysPassed <= 90) {
+                    // Atualizar progresso baseado nos dias
+                    if (daysPassed <= 30) {
+                        updateProgress('month1', (daysPassed / 30) * 100);
+                    } else if (daysPassed <= 60) {
+                        updateProgress('month1', 100);
+                        updateProgress('month2', ((daysPassed - 30) / 30) * 100);
+                    } else {
+                        updateProgress('month1', 100);
+                        updateProgress('month2', 100);
+                        updateProgress('month3', ((daysPassed - 60) / 30) * 100);
+                    }
+                }
+            }
+        });
+        
+        // Animações de entrada
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Aplicar animação aos elementos
+        document.querySelectorAll('.timeline-content, .checklist-card, .resource-card').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(element);
+        });
+    </script>
+</body>
+                      </html>
